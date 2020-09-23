@@ -1,4 +1,4 @@
-# Getting Started with ASP.NET Web API
+# Getting Started with ASP.NET Web API and Angular CLI
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) and ASP.NET Web API
 
