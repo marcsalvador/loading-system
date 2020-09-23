@@ -1,0 +1,57 @@
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+    <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+
+<div class="jumbotron">
+    <h1 class="display-4">Q-LESS | Discount Registration</h1>
+    <div class="row">
+        <div class="col-sm-6">
+            <br>
+            <strong>Enter Card Number</strong>
+            <div class="input-group input-group-lg">
+                <input type="text" class="form-control" [formControl]="cardNumber">
+                <div class="input-group-append" id="button-addon4">
+                    <button class="btn btn-primary" type="button" (click)="validate()">Validate</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <br>
+            <strong>Outstanding Balance</strong>
+            <div class="input-group input-group-lg">
+                <input type="text" class="form-control text-right" [value]="balance" readonly>
+            </div>
+        </div>
+    </div>  
+    <div class="row" *ngIf="card!=null">
+        <div class="col-sm-6">
+            <br>
+            <strong>Enter Select Discount Type</strong>
+            <select class="form-control form-control-lg" [formControl]="discountType" (change)="onDiscountChanged()">
+                <option *ngFor="let item of discountTypes" [value]="item.value">
+                    {{item.text}}
+                  </option>
+            </select>
+        </div>
+        <div class="col-sm-6" *ngIf="discountIdName!=''">
+            <br>
+            <strong>{{discountIdName}}</strong>
+            <div class="input-group input-group-lg">
+                <input type="text" class="form-control" [maxlength]="max" [formControl]="idNumber">
+            </div>
+        </div>
+    </div> 
+    <hr class="my-4">
+    <div class="row container-fluid">
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 ">
+            <button (click)="back()" class="btn btn-primary btn-lg" style="width:100%; margin-bottom: 1px;">
+                Back
+            </button>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 ">
+            <button (click)="contiue()" class="btn btn-primary btn-lg" style="width:100%; margin-bottom: 1px;">
+                Register
+            </button>
+        </div>
+    </div>
+</div>

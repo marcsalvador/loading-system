@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="LoadingSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CardLoadHistory">
+          <Key>
+            <PropertyRef Name="CardLoadHistoryId" />
+          </Key>
+          <Property Name="CardLoadHistoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CardId" Type="int" />
+          <Property Name="TenderedAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Cash" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Changed" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ProcessDateAndTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Cards">
+          <Key>
+            <PropertyRef Name="CardId" />
+          </Key>
+          <Property Name="CardId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CardNo" Type="nvarchar(max)" />
+          <Property Name="CardType" Type="int" />
+          <Property Name="ExpiryDate" Type="datetime" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="DiscountType" Type="int" />
+          <Property Name="PwdId" Type="nvarchar" MaxLength="50" />
+          <Property Name="SeniorCitizenControlNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="PurchaseDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CardTravelHistory">
+          <Key>
+            <PropertyRef Name="CardTravelHistoryId" />
+          </Key>
+          <Property Name="CardTravelHistoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CardId" Type="int" />
+          <Property Name="OriginStation" Type="nvarchar(max)" />
+          <Property Name="DestinationStation" Type="nvarchar(max)" />
+          <Property Name="DiscountAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="AmountPaid" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="DiscountType" Type="int" />
+          <Property Name="ProcessDateAndTime" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'QLess.dbo.StationPrices' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="StationPrices">
+          <Key>
+            <PropertyRef Name="StationPriceId" />
+          </Key>
+          <Property Name="StationPriceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StationOriginId" Type="int" />
+          <Property Name="StationDestinationId" Type="int" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Stations">
+          <Key>
+            <PropertyRef Name="StationId" />
+          </Key>
+          <Property Name="StationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Group" Type="int" />
+          <Property Name="Sequence" Type="int" />
+        </EntityType>
+        <EntityContainer Name="LoadingSystemModelStoreContainer">
+          <EntitySet Name="CardLoadHistory" EntityType="Self.CardLoadHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cards" EntityType="Self.Cards" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CardTravelHistory" EntityType="Self.CardTravelHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stations" EntityType="Self.Stations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StationPrices" EntityType="Self.StationPrices" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [StationPrices].[StationPriceId] AS [StationPriceId], 
+    [StationPrices].[StationOriginId] AS [StationOriginId], 
+    [StationPrices].[StationDestinationId] AS [StationDestinationId], 
+    [StationPrices].[Price] AS [Price]
+    FROM [dbo].[StationPrices] AS [StationPrices]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LoadingSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CardLoadHistory">
+          <Key>
+            <PropertyRef Name="CardLoadHistoryId" />
+          </Key>
+          <Property Name="CardLoadHistoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CardId" Type="Int32" />
+          <Property Name="TenderedAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Cash" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Changed" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ProcessDateAndTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Card">
+          <Key>
+            <PropertyRef Name="CardId" />
+          </Key>
+          <Property Name="CardId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CardNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CardType" Type="Int32" />
+          <Property Name="ExpiryDate" Type="DateTime" Precision="3" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="DiscountType" Type="Int32" />
+          <Property Name="PwdId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SeniorCitizenControlNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PurchaseDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="CardTravelHistory">
+          <Key>
+            <PropertyRef Name="CardTravelHistoryId" />
+          </Key>
+          <Property Name="CardTravelHistoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CardId" Type="Int32" />
+          <Property Name="OriginStation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DestinationStation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DiscountAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AmountPaid" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="DiscountType" Type="Int32" />
+          <Property Name="ProcessDateAndTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Station">
+          <Key>
+            <PropertyRef Name="StationId" />
+          </Key>
+          <Property Name="StationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Group" Type="Int32" />
+          <Property Name="Sequence" Type="Int32" />
+        </EntityType>
+        <EntityType Name="StationPrice">
+          <Key>
+            <PropertyRef Name="StationPriceId" />
+          </Key>
+          <Property Name="StationPriceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StationOriginId" Type="Int32" />
+          <Property Name="StationDestinationId" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityContainer Name="LoadingSystemEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CardLoadHistories" EntityType="Self.CardLoadHistory" />
+          <EntitySet Name="Cards" EntityType="Self.Card" />
+          <EntitySet Name="CardTravelHistories" EntityType="Self.CardTravelHistory" />
+          <EntitySet Name="Stations" EntityType="Self.Station" />
+          <EntitySet Name="StationPrices" EntityType="Self.StationPrice" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LoadingSystemModelStoreContainer" CdmEntityContainer="LoadingSystemEntities">
+          <EntitySetMapping Name="CardLoadHistories">
+            <EntityTypeMapping TypeName="LoadingSystemModel.CardLoadHistory">
+              <MappingFragment StoreEntitySet="CardLoadHistory">
+                <ScalarProperty Name="CardLoadHistoryId" ColumnName="CardLoadHistoryId" />
+                <ScalarProperty Name="CardId" ColumnName="CardId" />
+                <ScalarProperty Name="TenderedAmount" ColumnName="TenderedAmount" />
+                <ScalarProperty Name="Cash" ColumnName="Cash" />
+                <ScalarProperty Name="Changed" ColumnName="Changed" />
+                <ScalarProperty Name="ProcessDateAndTime" ColumnName="ProcessDateAndTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cards">
+            <EntityTypeMapping TypeName="LoadingSystemModel.Card">
+              <MappingFragment StoreEntitySet="Cards">
+                <ScalarProperty Name="CardId" ColumnName="CardId" />
+                <ScalarProperty Name="CardNo" ColumnName="CardNo" />
+                <ScalarProperty Name="CardType" ColumnName="CardType" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="DiscountType" ColumnName="DiscountType" />
+                <ScalarProperty Name="PwdId" ColumnName="PwdId" />
+                <ScalarProperty Name="SeniorCitizenControlNumber" ColumnName="SeniorCitizenControlNumber" />
+                <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CardTravelHistories">
+            <EntityTypeMapping TypeName="LoadingSystemModel.CardTravelHistory">
+              <MappingFragment StoreEntitySet="CardTravelHistory">
+                <ScalarProperty Name="CardTravelHistoryId" ColumnName="CardTravelHistoryId" />
+                <ScalarProperty Name="CardId" ColumnName="CardId" />
+                <ScalarProperty Name="OriginStation" ColumnName="OriginStation" />
+                <ScalarProperty Name="DestinationStation" ColumnName="DestinationStation" />
+                <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
+                <ScalarProperty Name="AmountPaid" ColumnName="AmountPaid" />
+                <ScalarProperty Name="DiscountType" ColumnName="DiscountType" />
+                <ScalarProperty Name="ProcessDateAndTime" ColumnName="ProcessDateAndTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stations">
+            <EntityTypeMapping TypeName="LoadingSystemModel.Station">
+              <MappingFragment StoreEntitySet="Stations">
+                <ScalarProperty Name="StationId" ColumnName="StationId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Group" ColumnName="Group" />
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StationPrices">
+            <EntityTypeMapping TypeName="LoadingSystemModel.StationPrice">
+              <MappingFragment StoreEntitySet="StationPrices">
+                <ScalarProperty Name="StationPriceId" ColumnName="StationPriceId" />
+                <ScalarProperty Name="StationOriginId" ColumnName="StationOriginId" />
+                <ScalarProperty Name="StationDestinationId" ColumnName="StationDestinationId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

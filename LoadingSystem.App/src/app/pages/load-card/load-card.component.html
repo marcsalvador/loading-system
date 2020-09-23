@@ -1,0 +1,140 @@
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+    <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+
+<div class="jumbotron container-fluid">
+    <h1 class="display-4">Q-LESS | Card Reloading</h1>
+    
+    <div class="row">
+        <div class="col-sm-6">
+            <br>
+            <strong>Enter Card Number</strong>
+            <div class="input-group input-group-lg">
+                <input type="text" class="form-control" [formControl]="cardNumber">
+                <div class="input-group-append" id="button-addon4">
+                    <button class="btn btn-primary" type="button" (click)="validate()">Validate</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <br>
+            <strong>Outstanding Balance</strong>
+            <div class="input-group input-group-lg">
+                <input type="text" class="form-control text-right" [value]="balance" readonly>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <br>
+            <strong>Select Load Amount</strong>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 ">
+                    <button (click)="addAmount(100)" class="btn btn-primary btn-lg" style="width:100%; margin-bottom: 1px;">
+                        100
+                    </button>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 ">
+                    <button (click)="addAmount(500)" class="btn btn-primary btn-lg" style="width:100%; margin-bottom: 1px;">
+                        500
+                    </button>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 ">
+                    <button (click)="addAmount(1000)" class="btn btn-primary btn-lg" style="width:100%; margin-bottom: 1px;">
+                        1000
+                    </button>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 ">
+                    <button (click)="addAmount(5000)" class="btn btn-primary btn-lg" style="width:100%; margin-bottom: 1px;">
+                        5000
+                    </button>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 ">
+                    <button (click)="addAmount(10000)" class="btn btn-primary btn-lg" style="width:100%; margin-bottom: 1px;">
+                        10000
+                    </button>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 ">
+                    <button (click)="clear()" class="btn btn-primary btn-lg" style="width:100%; margin-bottom: 1px;">
+                        Clear
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <br>
+            <strong>Total</strong>
+            <div class="input-group input-group-lg">
+                <input type="text" class="form-control text-right" [value]="tenderedAmount" placeholder="Total" readonly>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <br>
+            <strong>Enter Cash</strong>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 ">
+                    <button (click)="addCash(100)" class="btn btn-primary btn-lg" style="width:100%; margin-bottom: 1px;">
+                        100
+                    </button>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 ">
+                    <button (click)="addCash(500)" class="btn btn-primary btn-lg" style="width:100%; margin-bottom: 1px;">
+                        500
+                    </button>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 ">
+                    <button (click)="addCash(1000)" class="btn btn-primary btn-lg" style="width:100%; margin-bottom: 1px;">
+                        1000
+                    </button>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 ">
+                    <button (click)="addCash(5000)" class="btn btn-primary btn-lg" style="width:100%; margin-bottom: 1px;">
+                        5000
+                    </button>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 ">
+                    <button (click)="addCash(10000)" class="btn btn-primary btn-lg" style="width:100%; margin-bottom: 1px;">
+                        10000
+                    </button>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 ">
+                    <button (click)="clearCash()" class="btn btn-primary btn-lg" style="width:100%; margin-bottom: 1px;">
+                        Clear
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <br>
+            <strong>Cash</strong>
+            <div class="input-group input-group-lg">                
+                <input type="text" class="form-control text-right" [formControl]="cash" (change)="onCashChange()" ngModel>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">  
+            <br>
+            <strong>Change</strong>
+            <div class="input-group input-group-lg">
+                <input type="text" class="form-control text-right" [value]="change" readonly>
+            </div>
+        </div>
+    </div>
+    <hr class="my-4">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 ">
+            <button (click)="back()" class="btn btn-primary btn-lg" style="width:100%; margin-bottom: 1px;">
+                Back
+            </button>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 ">
+            <button (click)="contiue()" class="btn btn-primary btn-lg" style="width:100%; margin-bottom: 1px;">
+                Buy
+            </button>
+        </div>
+    </div>
+</div>
